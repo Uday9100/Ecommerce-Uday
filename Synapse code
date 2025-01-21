@@ -1,0 +1,43 @@
+--creating view 1
+create SCHEMA gold
+
+CREATE VIEW gold.final1
+AS
+SELECT
+     *
+FROM
+    OPENROWSET(
+        BULK 'https://ecommerceuday.dfs.core.windows.net/data/Silver/',
+        FORMAT = 'PARQUET'
+    ) AS result1
+    
+
+select * from gold.final1
+
+--creating view 2
+CREATE VIEW gold.final2
+AS
+SELECT
+     *
+FROM
+    OPENROWSET(
+        BULK 'https://ecommerceuday.dfs.core.windows.net/data/Silver/',
+        FORMAT = 'PARQUET'
+    ) AS result2
+where order_status='delivered' 
+
+select top 100* from gold.final2
+
+--creating creditinals and sending back to  gold layer
+CREATE VIEW gold.final2
+AS
+SELECT
+     *
+FROM
+    OPENROWSET(
+        BULK 'https://ecommerceuday.dfs.core.windows.net/data/Silver/',
+        FORMAT = 'PARQUET'
+    ) AS result2
+where order_status='delivered' 
+
+select top 100* from gold.final2
